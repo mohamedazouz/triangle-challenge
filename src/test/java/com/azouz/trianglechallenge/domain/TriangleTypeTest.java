@@ -16,7 +16,9 @@ public class TriangleTypeTest {
 
     @Test
     public void equilateralType() throws NoSuchTriangleTypeException {
-        final TriangleType triangleType = TriangleType.fromSides(1, 1, 1);
+        final Triangle triangle = Triangle.builder().
+                withSide1(1).withSide2(1).withSide3(1).build();
+        final TriangleType triangleType = TriangleType.fromSides(triangle);
         assertEquals(triangleType, EQUILATERAL);
         assertNotEquals(triangleType, ISOSCELES);
         assertNotEquals(triangleType, SCALENE);
@@ -24,7 +26,9 @@ public class TriangleTypeTest {
 
     @Test
     public void isoscelesTypeWithEqualXZ() throws NoSuchTriangleTypeException {
-        final TriangleType triangleType = TriangleType.fromSides(1, 2, 1);
+        final Triangle triangle = Triangle.builder().
+                withSide1(1).withSide2(2).withSide3(1).build();
+        final TriangleType triangleType = TriangleType.fromSides(triangle);
         assertEquals(triangleType, ISOSCELES);
         assertNotEquals(triangleType, EQUILATERAL);
         assertNotEquals(triangleType, SCALENE);
@@ -32,7 +36,9 @@ public class TriangleTypeTest {
 
     @Test
     public void isoscelesTypeWithEqualXY() throws NoSuchTriangleTypeException {
-        final TriangleType triangleType = TriangleType.fromSides(1, 1, 3);
+        final Triangle triangle = Triangle.builder().
+                withSide1(1).withSide2(1).withSide3(3).build();
+        final TriangleType triangleType = TriangleType.fromSides(triangle);
         assertEquals(triangleType, ISOSCELES);
         assertNotEquals(triangleType, EQUILATERAL);
         assertNotEquals(triangleType, SCALENE);
@@ -40,7 +46,9 @@ public class TriangleTypeTest {
 
     @Test
     public void isoscelesTypeWithEqualZY() throws NoSuchTriangleTypeException {
-        final TriangleType triangleType = TriangleType.fromSides(3, 2, 2);
+        final Triangle triangle = Triangle.builder().
+                withSide1(3).withSide2(2).withSide3(2).build();
+        final TriangleType triangleType = TriangleType.fromSides(triangle);
         assertEquals(triangleType, ISOSCELES);
         assertNotEquals(triangleType, EQUILATERAL);
         assertNotEquals(triangleType, SCALENE);
@@ -49,7 +57,9 @@ public class TriangleTypeTest {
 
     @Test
     public void scaleneType() throws NoSuchTriangleTypeException {
-        final TriangleType triangleType = TriangleType.fromSides(3, 5, 10);
+        final Triangle triangle = Triangle.builder().
+                withSide1(3).withSide2(5).withSide3(10).build();
+        final TriangleType triangleType = TriangleType.fromSides(triangle);
         assertEquals(triangleType, SCALENE);
         assertNotEquals(triangleType, EQUILATERAL);
         assertNotEquals(triangleType, ISOSCELES);
@@ -57,37 +67,63 @@ public class TriangleTypeTest {
 
     @Test(expected = NoSuchTriangleTypeException.class)
     public void invalidSidesLengthsX() throws NoSuchTriangleTypeException {
-        TriangleType.fromSides(-1, 2, 2);
+        final Triangle triangle = Triangle.builder().
+                withSide1(-1).withSide2(2).withSide3(2).build();
+        TriangleType.fromSides(triangle);
 
     }
     @Test(expected = NoSuchTriangleTypeException.class)
     public void invalidSidesLengthsY() throws NoSuchTriangleTypeException {
-        TriangleType.fromSides(1, -2, 2);
+        final Triangle triangle = Triangle.builder().
+                withSide1(1).withSide2(-2).withSide3(2).build();
+        TriangleType.fromSides(triangle);
     }
 
     @Test(expected = NoSuchTriangleTypeException.class)
     public void invalidSidesLengthsZ() throws NoSuchTriangleTypeException {
-        TriangleType.fromSides(1, 2, -2);
+        final Triangle triangle = Triangle.builder().
+                withSide1(1).withSide2(2).withSide3(-2).build();
+        TriangleType.fromSides(triangle);
     }
 
 
     @Test(expected = NoSuchTriangleTypeException.class)
     public void invalidSidesLengthsXYZ() throws NoSuchTriangleTypeException {
-        TriangleType.fromSides(-1, -2, -2);
+        final Triangle triangle = Triangle.builder().
+                withSide1(-1).withSide2(-2).withSide3(-2).build();
+        TriangleType.fromSides(triangle);
     }
 
     @Test(expected = NoSuchTriangleTypeException.class)
     public void invalidSidesLengthsXY() throws NoSuchTriangleTypeException {
-        TriangleType.fromSides(-1, -2, 3);
+        final Triangle triangle = Triangle.builder().
+                withSide1(-1).withSide2(-2).withSide3(2).build();
+        TriangleType.fromSides(triangle);
     }
 
     @Test(expected = NoSuchTriangleTypeException.class)
     public void invalidSidesLengthsXZ() throws NoSuchTriangleTypeException {
-        TriangleType.fromSides(-1, 7, -5);
+        final Triangle triangle = Triangle.builder().
+                withSide1(-1).withSide2(2).withSide3(-1).build();
+        TriangleType.fromSides(triangle);
     }
 
     @Test(expected = NoSuchTriangleTypeException.class)
     public void invalidSidesLengthsYZ() throws NoSuchTriangleTypeException {
-        TriangleType.fromSides(1, -7, -5);
+        final Triangle triangle = Triangle.builder().
+                withSide1(1).withSide2(-7).withSide3(-5).build();
+        TriangleType.fromSides(triangle);
+    }
+
+    @Test(expected = NoSuchTriangleTypeException.class)
+    public void invalidSidesLengthsWithNoInput() throws NoSuchTriangleTypeException {
+        final Triangle triangle = Triangle.builder().build();
+        TriangleType.fromSides(triangle);
+    }
+
+    @Test(expected = NoSuchTriangleTypeException.class)
+    public void invalidSidesLengthsWithNoXInput() throws NoSuchTriangleTypeException {
+        final Triangle triangle = Triangle.builder().withSide2(2).withSide3(3).build();
+        TriangleType.fromSides(triangle);
     }
 }

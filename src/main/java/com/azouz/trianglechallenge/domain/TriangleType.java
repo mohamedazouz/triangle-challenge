@@ -10,18 +10,18 @@ import java.text.MessageFormat;
 public enum TriangleType {
 
     EQUILATERAL("Equilateral") {
-        protected boolean isValidSides(final int x, final int y, final int z) {
-            if (x == y && y == z) return true;
+        protected boolean isValidSides(final int side1, final int side2, final int side3) {
+            if (side1 == side2 && side2 == side3) return true;
             return false;
         }
     }, ISOSCELES("Isosceles") {
-        protected boolean isValidSides(final int x, final int y, final int z) {
-            if (x == y || x == z || y == z) return true;
+        protected boolean isValidSides(final int side1, final int side2, final int side3) {
+            if (side1 == side2 || side1 == side3 || side2 == side3) return true;
             return false;
         }
     }, SCALENE("Scalene") {
-        protected boolean isValidSides(final int x, final int y, final int z) {
-            if (x != y && x != z && y != z) return true;
+        protected boolean isValidSides(final int side1, final int side2, final int side3) {
+            if (side1 != side2 && side1 != side3 && side2 != side3) return true;
             return false;
         }
     };
@@ -32,25 +32,25 @@ public enum TriangleType {
         this.typeName = typeName;
     }
 
-    public static TriangleType fromSides(final int x, final int y, final int z) throws NoSuchTriangleTypeException {
+    public static TriangleType fromSides(final Triangle triangle) throws NoSuchTriangleTypeException {
         for (final TriangleType triangleType : TriangleType.values()) {
-            if (triangleType.isValid(x, y, z)) {
+            if (triangleType.isValid(triangle)) {
                 return triangleType;
             }
         }
         throw new NoSuchTriangleTypeException(
-                MessageFormat.format("No type with following values x:{0}, y:{1}, z:{2}", x, y, z));
+                MessageFormat.format("No type with following values Triangle: {0}", triangle));
     }
 
     public String getTypeName() {
         return typeName;
     }
 
-    protected abstract boolean isValidSides(final int x, final int y, int z);
+    protected abstract boolean isValidSides(final int side1, final int side2, int side3);
 
-    private boolean isValid(final int x, final int y, int z) {
-        if (x <= 0 || y <= 0 || z <= 0) return false;
-        return isValidSides(x, y, z);
+    private boolean isValid(final Triangle triangle) {
+        if (triangle.getSide1() <= 0 || triangle.getSide2() <= 0 || triangle.getSide3() <= 0) return false;
+        return isValidSides(triangle.getSide1(), triangle.getSide2(), triangle.getSide3());
 
     }
 }

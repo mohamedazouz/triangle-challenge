@@ -53,6 +53,15 @@ public class Triangle {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Triangle{" +
+                "side1=" + side1 +
+                ", side2=" + side2 +
+                ", side3=" + side3 +
+                '}';
+    }
+
     public static class Builder {
         private int side1;
         private int side2;
