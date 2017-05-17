@@ -1,5 +1,6 @@
 package com.azouz.trianglechallenge;
 
+import com.azouz.trianglechallenge.exception.NoSuchTriangleTypeException;
 import org.junit.Test;
 
 /**
@@ -8,7 +9,7 @@ import org.junit.Test;
 public class ApplicationTest {
 
     @Test
-    public void testMain() {
+    public void testMain() throws NoSuchTriangleTypeException {
         Application.main(null);
     }
 }
