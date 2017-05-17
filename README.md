@@ -33,3 +33,34 @@ Run locally
 ----------------------
 
         java -jar target/triangle-challenge.jar 1 1 1
+        
+ Examples:
+ ------------
+ 
+ ````
+ $ java -jar target/triangle-challenge.jar 1 1 1 
+ Triangle{side1=1, side2=1, side3=1} is Equilateral Triangle
+ 
+ $ java -jar target/triangle-challenge.jar 1 2 3
+ Triangle{side1=1, side2=2, side3=3} is Scalene Triangle
+ 
+ $ java -jar target/triangle-challenge.jar 1 2 1
+ Triangle{side1=1, side2=2, side3=1} is Isosceles Triangle
+ 
+ $ java -jar target/triangle-challenge.jar 1 2 invalid13444
+ Invalid input: For input string: "invalid13444"
+ 
+ $ java -jar target/triangle-challenge.jar 1 2
+ Invalid input: Please check your input: [1, 2]
+ 
+ $ java -jar target/triangle-challenge.jar
+ Invalid input: Please check your input: []
+ 
+ $ java -jar target/triangle-challenge.jar 1 0 1
+ Invalid input: Side length should be > 0: 0
+ 
+ $ java -jar target/triangle-challenge.jar -1 2 3
+ Invalid input: Side length should be > 0: -1
+ ```
+ 
+ 
